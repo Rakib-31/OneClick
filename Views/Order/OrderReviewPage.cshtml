@@ -1,0 +1,312 @@
+﻿@model OneClick.Helper.ProductDisplayModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .quantity-input {
+        max-width: 60px;
+        padding: 8px;
+        border: 1px solid #e2e5ec;
+        border-radius: 4px;
+    }
+
+    .discount-percent {
+        display: inline;
+        margin-left: 20px;
+        padding-left: 5px;
+        padding-right: 5px;
+        border-radius: 5px;
+    }
+</style>
+
+<div class="kt-subheader   kt-grid__item" id="kt_subheader">
+    <div class="kt-container  kt-container--fluid ">
+        <div class="kt-subheader__main">
+            <h3 class="kt-subheader__title">
+                Product
+            </h3>
+        </div>
+    </div>
+</div>
+
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid" id="order-review-body">
+    @using (Html.BeginForm("preorder", "order", FormMethod.Post))
+    {
+        @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.Name)
+        @Html.HiddenFor(m => m.Category)
+
+        <div class="row">
+            <div class="col-xl-4 col-lg-4 col-md-4 order-lg-1 order-xl-1">
+
+                <!--begin:: Widgets/Top Locations-->
+                <div class="kt-portlet kt-portlet--head--noborder kt-portlet--height-fluid">
+                    <div class="kt-portlet__head">
+                        <div class="kt-portlet__head-label">
+                            <h3 class="kt-portlet__head-title">
+                                Top Locations
+                            </h3>
+                        </div>
+                        <div class="kt-portlet__head-toolbar">
+                            <div class="dropdown dropdown-inline">
+                                <button type="button" class="btn btn-clean btn-sm btn-icon btn-icon-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="flaticon-more-1"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <ul class="kt-nav">
+                                        <li class="kt-nav__section kt-nav__section--first">
+                                            <span class="kt-nav__section-text">Finance</span>
+                                        </li>
+                                        <li class="kt-nav__item">
+                                            <a href="#" class="kt-nav__link">
+                                                <i class="kt-nav__link-icon flaticon2-graph-1"></i>
+                                                <span class="kt-nav__link-text">Statistics</span>
+                                            </a>
+                                        </li>
+                                        <li class="kt-nav__item">
+                                            <a href="#" class="kt-nav__link">
+                                                <i class="kt-nav__link-icon flaticon2-calendar-4"></i>
+                                                <span class="kt-nav__link-text">Events</span>
+                                            </a>
+                                        </li>
+                                        <li class="kt-nav__item">
+                                            <a href="#" class="kt-nav__link">
+                                                <i class="kt-nav__link-icon flaticon2-layers-1"></i>
+                                                <span class="kt-nav__link-text">Reports</span>
+                                            </a>
+                                        </li>
+                                        <li class="kt-nav__section">
+                                            <span class="kt-nav__section-text">Customers</span>
+                                        </li>
+                                        <li class="kt-nav__item">
+                                            <a href="#" class="kt-nav__link">
+                                                <i class="kt-nav__link-icon flaticon2-calendar-4"></i>
+                                                <span class="kt-nav__link-text">Notifications</span>
+                                            </a>
+                                        </li>
+                                        <li class="kt-nav__item">
+                                            <a href="#" class="kt-nav__link">
+                                                <i class="kt-nav__link-icon flaticon2-file-1"></i>
+                                                <span class="kt-nav__link-text">Files</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="kt-portlet__body">
+                        <div class="kt-widget15">
+                            <div class="kt-widget15__map">
+                                <div id="kt_chart_latest_trends_map" style="height:320px;"></div>
+                            </div>
+                            <div class="kt-widget15__items kt-margin-t-30">
+                                <div class="row">
+                                    <div class="col">
+
+                                        <!--begin::widget item-->
+                                        <div class="kt-widget15__item">
+                                            <span class="kt-widget15__stats">
+                                                63%
+                                            </span>
+                                            <span class="kt-widget15__text">
+                                                London
+                                            </span>
+                                            <div class="kt-space-10"></div>
+                                            <div class="progress m-progress--sm">
+                                                <div class="progress-bar bg-danger" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+
+                                        <!--end::widget item-->
+                                    </div>
+                                    <div class="col">
+
+                                        <!--begin::widget item-->
+                                        <div class="kt-widget15__item">
+                                            <span class="kt-widget15__stats">
+                                                54%
+                                            </span>
+                                            <span class="kt-widget15__text">
+                                                Glasgow
+                                            </span>
+                                            <div class="kt-space-10"></div>
+                                            <div class="progress m-progress--sm">
+                                                <div class="progress-bar bg-warning" role="progressbar" style="width: 40%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+
+                                        <!--end::widget item-->
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+
+                                        <!--begin::widget item-->
+                                        <div class="kt-widget15__item">
+                                            <span class="kt-widget15__stats">
+                                                41%
+                                            </span>
+                                            <span class="kt-widget15__text">
+                                                Dublin
+                                            </span>
+                                            <div class="kt-space-10"></div>
+                                            <div class="progress m-progress--sm">
+                                                <div class="progress-bar bg-success" role="progressbar" style="width: 55%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div>
+
+                                        <!--end::widget item-->
+                                    </div>
+                                    <div class="col">
+
+                                        <!--begin::widget item-->
+                                        <div class="kt-widget15__item">
+                                            <span class="kt-widget15__stats">
+                                                79%
+                                            </span>
+                                            <span class="kt-widget15__text">
+                                                Edinburgh
+                                            </span>
+                                            <div class="kt-space-10"></div>
+                                            <div class="progress m-progress--sm">
+                                                <div class="progress-bar bg-primary" role="progressbar" style="width: 60%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+
+                                            <!--end::widget item-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--end:: Widgets/Top Locations-->
+            </div>
+            <div class="col-xl-5 col-lg-5 col-md-5 order-lg-1 order-xl-1">
+
+                <!--begin:: Widgets/Trends-->
+                <div class="kt-portlet kt-portlet--head--noborder kt-portlet--height-fluid">
+                    <div class="kt-portlet__head-label">
+                        <h3 class="kt-portlet__head">
+                            Product Order Details
+                        </h3>
+                    </div>
+                    <div class="kt-portlet__body ">
+                        <div><h3>@Model.Name</h3></div>
+                        <hr />
+                        <div class="form-group">
+                            <div>
+                                <h3 class="kt-widget26__desc" style="color: orange;"><b>৳@Model.DiscountPrice</b></h3>
+                            </div>
+                            @if (Model.Discount > 0.0)
+                            {
+                                <div style="float: left">
+                                    <span style="display: inline;"><del>@Model.Price</del></span>
+                                    <span class="btn-danger discount-percent">@Model.Discount % </span>
+                                </div>
+                            }
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-3 col-form-label">Quantity</label>
+                            <div class="col-9">
+                                <div class="kt-mycart__action">
+                                    <button type="button" class="btn btn-label-success btn-icon" onclick="changeQuantity(-1)">−</button>
+                                    <span class="kt-mycart__quantity"><input id="quantity-value" name="Quantity" class="quantity-input" value="1" /></span>
+                                    <button type="button" class="btn btn-label-success btn-icon" onclick="changeQuantity(1)">+</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-3 col-form-label">Color</label>
+                            <div class="col-9">
+                                <div class="kt-radio-inline">
+                                    @if (Model != null)
+                                    {
+                                        foreach (var item in Model.Color)
+                                        {
+                                            <label class="kt-radio">
+                                                <input type="radio" name="Color"> @item
+                                                <span></span>
+                                            </label>
+
+                                        }
+                                    }
+                                </div>
+                                <span class="form-text text-muted">Some help text goes here</span>
+                            </div>
+                        </div>
+                        <div class="text-center" style="margin-top: auto;">
+                            <div style="margin-top: 20px;">
+                                <button type="submit" class="btn btn-danger" style="display: inline; padding-left: 25px; padding-right: 25px;">Buy Now</button>
+                                <button style="display: inline; margin-left: 20px;" class="btn btn-success">Add To Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--end:: Widgets/Trends-->
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 order-lg-1 order-xl-1">
+
+                <!--begin:: Widgets/Top Locations-->
+                <div class="kt-portlet kt-portlet--head--noborder kt-portlet--height-fluid">
+                    <div class="kt-portlet__head">
+                        <div class="kt-portlet__head-label">
+                            <h3 class="kt-portlet__head-title">
+                                Top Locations
+                            </h3>
+                        </div>
+
+                    </div>
+                    <div class="kt-portlet__body">
+                        <div class="kt-portlet__head-toolbar">
+                            <div class="form-group row">
+                                <label class="col-5 col-form-label">Promo-code</label>
+                                <div class="col-7">
+                                    <div class="kt-mycart__action">
+                                        <input readonly id="voucher" class="form-control" value="" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-4 col-form-label">Sub-Total</label>
+                                <div class="col-8">
+                                    <div class="kt-mycart__action">
+                                        <input name="SubTotal" readonly id="sub-total-price" class="form-control" value="@Model.DiscountPrice" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--end:: Widgets/Top Locations-->
+            </div>
+        </div>
+    }
+</div>
+
+
+<script>
+    function changeQuantity(change) {
+        var quantityValue = parseInt($("#quantity-value").val(), 10) + change;
+        if (quantityValue > -1) {
+            $("#quantity-value").val(quantityValue);
+            var price = @Model.DiscountPrice;
+            $("#sub-total-price").val((quantityValue * price).toFixed(2));
+        }
+    }
+</script>
+<script src="~/Content/js/UpdateScript/SubmitFormScript.js?v=1.0"></script>
+<script>
+    // Class definition
+    @*jQuery(document).ready(function () {
+        KTFormControls.init("/Order/PreOrder", "#order-review-body", "kt_form_orderreview");
+    });*@
+
+</script>
+

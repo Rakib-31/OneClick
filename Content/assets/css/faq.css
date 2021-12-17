@@ -1,0 +1,16 @@
+﻿.heading {
+    font-size: 28px;
+    line-height: 1.5;
+    color: #4863a0;
+    font-family: Poppins;
+    font-weight: 400;
+}
+
+.pText {
+    font-size: 17px;
+    line-height: 1.5;
+    color: #646c9a;
+    font-family: Poppins;
+    font-weight: 300;
+    text-align: justify
+}

@@ -1,0 +1,403 @@
+﻿@model OneClick.Helper.MobileDetailModel
+
+@{
+    Layout = null;
+}
+<style>
+    .btn-absolute {
+        position: absolute;
+        bottom: 5px;
+    }
+</style>
+<div class="row" id="virtualUpdateMobileBody">
+    <div class="col-md-12">
+        <div class="kt-portlet">
+            <!--begin::Form-->
+            <form class="kt-form " id="kt_form_virtualupdate">
+                @Html.HiddenFor(m => m.Id)
+                <div class="kt-portlet__body">
+
+                    <div class="form-group form-group-last kt-hide">
+                        <div class="alert alert-danger" role="alert" id="kt_form_1_msg">
+                            <div class="alert-icon">
+                                <i class="flaticon-warning"></i>
+                            </div>
+                            <div class="alert-text">
+                                Oh snap! Change a few things up and try submitting again.
+                            </div>
+                            <div class="alert-close">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">
+                                        <i class="la la-close"></i>
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-md-2 col-sm-12">Brand Name</label>
+                        <div class="col-lg-10 col-md-10 col-sm-12">
+                            @Html.TextBoxFor(model => model.BrandName, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-md-2 col-sm-12">Mobile Name</label>
+                        <div class="col-lg-10 col-md-10 col-sm-12">
+                            @Html.TextBoxFor(model => model.MobileName, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-md-2 col-sm-12">Price</label>
+                        <div class="col-lg-10 col-md-10 col-sm-12">
+                            @Html.TextBoxFor(model => model.Price, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-md-2 col-sm-12">Discount</label>
+                        <div class="col-lg-10 col-md-10 col-sm-12">
+                            @Html.TextBoxFor(model => model.Discount, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-md-2 col-sm-12">Color</label>
+                        <div class="col-lg-10 col-md-10 col-sm-12">
+                            @Html.TextBoxFor(model => model.Color, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-md-2 col-sm-12">RAM</label>
+                        <div class="col-lg-10 col-md-10 col-sm-12">
+                            @Html.TextBoxFor(model => model.Ram, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-md-2 col-sm-12">ROM</label>
+                        <div class="col-lg-10 col-md-10 col-sm-12">
+                            @Html.TextBoxFor(model => model.Rom, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-md-2 col-sm-12">Size</label>
+                        <div class="col-lg-10 col-md-10 col-sm-12">
+                            @Html.TextBoxFor(model => model.Size, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-md-2 col-sm-12">SKU</label>
+                        <div class="col-lg-10 col-md-10 col-sm-12">
+                            @Html.TextBoxFor(model => model.SKU, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-md-2 col-sm-12">Product Type</label>
+                        <div class="col-lg-10 col-md-10 col-sm-12">
+                            @Html.TextBoxFor(model => model.ProductType, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-md-2 col-sm-12">Model</label>
+                        <div class="col-lg-10 col-md-10 col-sm-12">
+                            @Html.TextBoxFor(model => model.ProductModel, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-md-2 col-sm-12">Display</label>
+                        <div class="col-lg-10 col-md-10 col-sm-12">
+                            @Html.TextBoxFor(model => model.Display, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-md-2 col-sm-12">Resolution</label>
+                        <div class="col-lg-10 col-md-10 col-sm-12">
+                            @Html.TextBoxFor(model => model.Resolution, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-md-2 col-sm-12">Display Type</label>
+                        <div class="col-lg-10 col-md-10 col-sm-12">
+                            @Html.TextBoxFor(model => model.DisplayType, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-md-2 col-sm-12">Display Protection</label>
+                        <div class="col-lg-10 col-md-10 col-sm-12">
+                            @Html.TextBoxFor(model => model.DisplayProtection, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-md-2 col-sm-12">OS</label>
+                        <div class="col-lg-10 col-md-10 col-sm-12">
+                            @Html.TextBoxFor(model => model.OS, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-md-2 col-sm-12">Chipset</label>
+                        <div class="col-lg-10 col-md-10 col-sm-12">
+                            @Html.TextBoxFor(model => model.Chipset, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-md-2 col-sm-12">CPU</label>
+                        <div class="col-lg-10 col-md-10 col-sm-12">
+                            @Html.TextBoxFor(model => model.CPU, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-md-2 col-sm-12">GPU</label>
+                        <div class="col-lg-10 col-md-10 col-sm-12">
+                            @Html.TextBoxFor(model => model.GPU, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-md-2 col-sm-12">Memory Card Slot</label>
+                        <div class="col-lg-10 col-md-10 col-sm-12">
+                            @Html.TextBoxFor(model => model.MemoryCardSlot, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-md-2 col-sm-12">Camera</label>
+                        <div class="col-lg-10 col-md-10 col-sm-12">
+                            @Html.TextBoxFor(model => model.Camera, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-md-2 col-sm-12">Selfie Camera</label>
+                        <div class="col-lg-10 col-md-10 col-sm-12">
+                            @Html.TextBoxFor(model => model.SelfieCamera, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-md-2 col-sm-12">Features</label>
+                        <div class="col-lg-10 col-md-10 col-sm-12">
+                            @Html.TextBoxFor(model => model.Features, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-md-2 col-sm-12">Video</label>
+                        <div class="col-lg-10 col-md-10 col-sm-12">
+                            @Html.TextBoxFor(model => model.Video, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-md-2 col-sm-12">WLAN</label>
+                        <div class="col-lg-10 col-md-10 col-sm-12">
+                            @Html.TextBoxFor(model => model.WLAN, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-md-2 col-sm-12">Bluetooth</label>
+                        <div class="col-lg-10 col-md-10 col-sm-12">
+                            @Html.TextBoxFor(model => model.Bluetooth, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-md-2 col-sm-12">GPS</label>
+                        <div class="col-lg-10 col-md-10 col-sm-12">
+                            @Html.TextBoxFor(model => model.GPS, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-md-2 col-sm-12">Radio</label>
+                        <div class="col-lg-10 col-md-10 col-sm-12">
+                            @Html.TextBoxFor(model => model.Radio, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-md-2 col-sm-12">USB</label>
+                        <div class="col-lg-10 col-md-10 col-sm-12">
+                            @Html.TextBoxFor(model => model.USB, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-md-2 col-sm-12">Sensor</label>
+                        <div class="col-lg-10 col-md-10 col-sm-12">
+                            @Html.TextBoxFor(model => model.Sensors, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-md-2 col-sm-12">Battery Type</label>
+                        <div class="col-lg-10 col-md-10 col-sm-12">
+                            @Html.TextBoxFor(model => model.BatteryType, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-md-2 col-sm-12">Battery Charging</label>
+                        <div class="col-lg-10 col-md-10 col-sm-12">
+                            @Html.TextBoxFor(model => model.BatteryCharging, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-md-2 col-sm-12">Jack</label>
+                        <div class="col-lg-10 col-md-10 col-sm-12">
+                            @Html.TextBoxFor(model => model.Jack, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-md-2 col-sm-12">SIM</label>
+                        <div class="col-lg-10 col-md-10 col-sm-12">
+                            @Html.TextBoxFor(model => model.SIM, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-md-2 col-sm-12">Network Technology</label>
+                        <div class="col-lg-10 col-md-10 col-sm-12">
+                            @Html.TextBoxFor(model => model.NetworkTechnology, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-md-2 col-sm-12">Dimentsion</label>
+                        <div class="col-lg-10 col-md-10 col-sm-12">
+                            @Html.TextBoxFor(model => model.Dimensions, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-md-2 col-sm-12">Weight</label>
+                        <div class="col-lg-10 col-md-10 col-sm-12">
+                            @Html.TextBoxFor(model => model.WeightGm, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-md-2 col-sm-12">Quantity</label>
+                        <div class="col-lg-10 col-md-10 col-sm-12">
+                            @Html.TextBoxFor(model => model.Quantity, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="kt-portlet__foot">
+                    <div class="kt-form__actions">
+                        <div class="row">
+                            <div class="col-lg-9 ml-lg-auto">
+                                <button type="button" class="btn btn-secondary btn-hover-danger details-btn d-none" onclick="detailsView()">Details View</button>
+                                <button type="button" class="btn btn-secondary btn-hover-danger short-btn " onclick="shortView()">Short View</button>
+                                <script>
+                                    $(function () {
+                                        $(".detailsView").removeClass("d-none");
+                                    });
+                                </script>
+
+                                <button type="submit" class="btn btn-brand">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!--end::Form-->
+        </div>
+    </div>
+</div>
+
+
+<script>
+    // Class definition
+    function updateVirtualOnSubmit() {
+        KTApp.block('#virtualUpdateMobileBody',
+            {
+                overlayColor: '#000000',
+                type: 'v2',
+                state: 'success',
+                message: 'Please wait...'
+            });
+        var vaId = $("#Id").val();
+        console.log($('form#kt_form_virtualupdate').serialize());
+        $.ajax(
+            {
+                url: '/Mobile/UpdateMobile?i='+1,
+                type: 'post',
+                dataType: 'json',
+                data: $('form#kt_form_virtualupdate').serialize(),
+                success: function (data)
+                {
+                    KTApp.unblock('#virtualUpdateMobileBody');
+                    if (data.Success == true) {
+                        //window.updatevirtualTableExercise();
+                        if (vaId == 0) {
+                            //insert
+                            toastr.success('Data added successfully.');
+                        } else {
+                            //update
+                            toastr.success('Data updated successfully.');
+                        }
+                        $("#newMobileEditModal").modal('hide'); window.modalCloseOfStack();
+                    }
+                    else if (data.success == false) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: data.Message,
+                        });
+                    }
+                    return;
+                },
+                error: function (data) {
+                    console.log(data);
+                    KTApp.unblock('#virtualUpdateMobileBody');
+                    toastr.error('Information isn\'t send. Please try refresh the window.');
+                }
+            });
+    }
+    var KTFormControls = function () {
+        // Private functions
+
+        var demo1 = function () {
+            $("#kt_form_virtualupdate").validate({
+                // define validation rules
+                rules: {
+
+                },
+                errorPlacement: function (error, element) {
+                    var group = element.closest('.input-group');
+                    if (group.length) {
+                        group.after(error.addClass('invalid-feedback'));
+                    } else {
+                        element.after(error.addClass('invalid-feedback'));
+                    }
+                },
+                //display error alert on form submit
+                invalidHandler: function (event, validator) {
+                    var alert = $('#kt_form_1_msg');
+                    alert.removeClass('kt--hide').show();
+                    KTUtil.scrollTop();
+                },
+                submitHandler: function (form) {
+                    //form[0].submit(); // submit the form
+                    window.updateVirtualOnSubmit();
+                }
+            });
+        };
+        return {
+            // public functions
+            init: function () {
+                demo1();
+            }
+        };
+    }();
+    jQuery(document).ready(function () {
+        KTFormControls.init();
+    });
+
+</script>
+<script>
+    var KTSummernoteDemo = function () {
+        // Private functions
+        var demos = function () {
+            $('.summernote').summernote({
+                height: 150
+            });
+        };
+        return {
+            // public functions
+            init: function () {
+                demos();
+            }
+        };
+    }();
+
+    // Initialization
+    jQuery(document).ready(function () {
+        KTSummernoteDemo.init();
+    });
+</script>
+
+
+

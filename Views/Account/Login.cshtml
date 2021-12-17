@@ -1,0 +1,140 @@
+﻿
+@{
+    ViewBag.Title = "Log in";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="kt-subheader   kt-grid__item" id="kt_subheader">
+    <div class="kt-container  kt-container--fluid ">
+        <div class="kt-subheader__main">
+            <h3 class="kt-subheader__title">
+                User Login
+            </h3>
+        </div>
+    </div>
+</div>
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+    <div class="kt-wizard-v4" id="kt_wizard_v4" data-ktwizard-state="step-first">
+        <div class="kt-wizard-v4__nav">
+            <div class="kt-wizard-v4__nav-items kt-wizard-v4__nav-items--clickable">
+                <div class="kt-wizard-v4__nav-item" id="firstwizerd"  data-ktwizard-state="current">
+                    <div class="kt-wizard-v4__nav-body">
+                        <div class="kt-wizard-v4__nav-number">
+                            1
+                        </div>
+                        <div class="kt-wizard-v4__nav-label">
+                            <div class="kt-wizard-v4__nav-label-title">
+                                Add Account
+                            </div>
+                            <div class="kt-wizard-v4__nav-label-desc">
+                                Create Custom Account
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="kt-wizard-v4__nav-item" id="secondwizerd">
+                    <div class="kt-wizard-v4__nav-body">
+                        <div class="kt-wizard-v4__nav-number">
+                            2
+                        </div>
+                        <div class="kt-wizard-v4__nav-label">
+                            <div class="kt-wizard-v4__nav-label-title">
+                                Your Address
+                            </div>
+                            <div class="kt-wizard-v4__nav-label-desc">
+                                Setup Your Address
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+        </div>
+        <div class="kt-portlet">
+            <div class="kt-portlet__body kt-portlet__body--fit">
+                <div class="kt-grid">
+                    <div>
+                        <div class="kt-wizard-v4__content">
+                            <div class="kt-grid kt-grid--ver kt-grid--root kt-page">
+                                <div class="kt-grid kt-grid--hor kt-grid--root  kt-login kt-login--v4 kt-login--signin" id="kt_login">
+                                    <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" style="background-image: url(https://localhost:44314/Content/assets/media/bg/bg-2.jpg);">
+                                        <div class="kt-grid__item kt-grid__item--fluid kt-login__wrapper">
+                                            <div class="kt-login__container">
+                                                <div class="kt-login__logo">
+                                                    <a href="#">
+                                                        <img src="~/Content/assets/media/logos/logo-5.png">
+                                                    </a>
+                                                </div>
+                                                <div class="kt-login__signin" id="kt_form_login">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script>
+    $(document).ready(function () {
+        var isLoginPage = @ViewBag.IsLoginPage;
+        var returnUrl = "@ViewBag.ReturnUrl";
+        returnUrl = returnUrl.replace(/&amp;/g, "samp");
+        console.log(returnUrl);
+        if (isLoginPage == false) {
+            $("#secondwizerd").attr("data-ktwizard-state", "current");
+            $("#firstwizerd").removeAttr("data-ktwizard-state");
+            getCredentialPage("register", returnUrl);
+        }
+        else if ($("#firstwizerd").attr("data-ktwizard-state")) {
+            getCredentialPage("login", returnUrl);
+        }
+        else {
+            getCredentialPage("register", returnUrl);
+        }
+
+        $("#firstwizerd").on("click", function () {
+            $("#firstwizerd").attr("data-ktwizard-state", "current");
+            $("#secondwizerd").removeAttr("data-ktwizard-state");
+            getCredentialPage("login", returnUrl);
+        });
+        $("#secondwizerd").on("click", function () {
+            $("#secondwizerd").attr("data-ktwizard-state", "current");
+            $("#firstwizerd").removeAttr("data-ktwizard-state");
+            getCredentialPage("register", returnUrl);
+        });
+    });
+</script>
+
+<script>
+    function getCredentialPage(page, returnUrl) {
+        debugger
+        KTApp.block('#kt_wizard_v4',
+            {
+                overlayColor: '#000000',
+                type: 'v2',
+                state: 'success',
+                message: 'Please wait...'
+            });
+        $.ajax({
+            url: `/Account/GetCredentialPage?page=${page}&returnUrl=${returnUrl}`,
+            type: "get",
+            async: true,
+            dataType: "html",
+            success: function (result) {
+                KTApp.unblock('#kt_wizard_v4');
+                $('#kt_form_login').html(result);
+            },
+            error: function () {
+                KTApp.unblock('#kt_wizard_v4');
+            }
+        });
+    }
+</script>

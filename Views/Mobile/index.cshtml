@@ -1,0 +1,146 @@
+﻿@model List<OneClick.Helper.ProductDisplayModel>
+@{
+    ViewBag.Title = "Mobiles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .discount-percent {
+        display: inline;
+        margin-left: 20px;
+        padding-left: 5px;
+        padding-right: 5px;
+        border-radius: 5px;
+    }
+</style>
+<div class="kt-subheader   kt-grid__item" id="kt_subheader">
+    <div class="kt-container  kt-container--fluid ">
+        <div class="kt-subheader__main">
+            <h3 class="kt-subheader__title">
+                Dashboard
+            </h3>
+            <span class="kt-subheader__separator kt-hidden"></span>
+            <div class="kt-subheader__breadcrumbs">
+                <a href="#" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i></a>
+                <span class="kt-subheader__breadcrumbs-separator"></span>
+                <a href="" class="kt-subheader__breadcrumbs-link">
+                    Application
+                </a>
+
+                <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Active link</span> -->
+            </div>
+        </div>
+        @if (User.IsInRole("Admin"))
+        {
+            <div class="kt-subheader__toolbar">
+                <div class="kt-subheader__wrapper">
+
+                    <button class="btn btn-primary" onclick="openNewMobileModal()">Add New Product</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+
+    <!--Begin::Dashboard 4-->
+    <!--Begin::Row-->
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="kt-portlet kt-portlet--height-fluid-half kt-portlet--border-bottom-brand col-sm-12 col-md-4 col-lg-3">
+                <div class="kt-portlet__body kt-portlet__body--fluid">
+                    <div class="kt-widget26">
+                        <div class="kt-widget26__content">
+                            <span class="kt-widget26__number">@item.Name</span>
+                            @{
+
+                                <span class="kt-widget26__desc"><b>৳@item.DiscountPrice</b></span>
+                                if (item.Discount > 0.0)
+                                {
+                                    <div style="float: left">
+                                        <span style="display: inline;"><del>@item.Price</del></span>
+                                        <span class="btn-danger discount-percent">@item.Discount % </span>
+                                    </div>
+                                }
+                            }
+                            <div class="text-center">
+                                <div style="float: left; margin-top: 20px;">
+                                    <a style="display: inline;" class="btn btn-danger" href="/order/OrderReview?id=@item.Id&category=@item.Category">Buy Now</a>
+                                    <button style="display: inline; margin-left: 20px;" class="btn btn-success">Add To Cart</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+
+
+</div>
+<div class="modal fade" id="newMobileEditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="newMobileEditModalTitle"></h5>
+                <button type="button" class="close" onclick="closeNewEditMobileModal()" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body" id="newMobileEditModalBody">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeNewEditMobileModal()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function closeNewEditMobileModal() {
+        $("#newMobileEditModal").modal('hide'); window.modalCloseOfStack();
+    }
+</script>
+
+<script>
+    function openNewMobileModal() {
+        KTApp.block('.kt-portlet__body',
+            {
+                overlayColor: '#000000',
+                type: 'v2',
+                state: 'success',
+                message: 'Please wait...'
+            });
+        $('#newMobileEditModalBody').attr("src", "");
+        $("#newMobileEditModalTitle").html("Add New Product");
+        $.ajax({
+            url: '/Mobile/AddNewMobile',
+            type: "get",
+            async: true,
+            success: function (result) {
+                KTApp.unblock('.kt-portlet__body');
+                $("#newMobileEditModal").modal({ backdrop: 'static' });
+                $('#newMobileEditModalBody').html(result);
+            },
+            error: function () {
+                KTApp.unblock('.kt-portlet__body');
+            }
+        });
+    }
+</script>
+<script>
+    function redirectOrderReviewPage(id, category) {
+        console.log(id, category);
+        $.ajax(
+            {
+                url: '/Order/OrderReview?id=' + id + '&category=' + category,
+                type: 'post',
+                success: function (data) {
+
+                },
+                error: function (data) {
+                }
+            });
+    }
+</script>

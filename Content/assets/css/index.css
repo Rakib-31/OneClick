@@ -1,0 +1,56 @@
+﻿
+
+@media (min-width: 1025px) and (max-width: 1399px) {
+    .mydiv5 {
+        background-color: #16325a;
+        text-align: center;
+        width: 100%;
+        margin-top: 100px;
+        height: 930px;
+    }
+
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .mydiv5 {
+        background-color: #16325a;
+        text-align: center;
+        width: 100%;
+        margin-top: 100px;
+        height: 930px;
+    }
+}
+
+@media (max-width: 768px) {
+    .mydiv5 {
+        height: 2300px!important;
+    }
+
+    .mydiv9 {
+        line-height: 30px;
+        margin-top: 20px;
+        margin-left: 3px;
+        margin-bottom: 30px;
+    }
+
+    #hideDiv {
+        display: none;
+    }
+    
+}
+@media (max-width: 480px) {
+    .mydiv5 {
+        height: 2300px !important;
+    }
+
+    .mydiv9 {
+        line-height: 30px;
+        margin-top: 20px;
+        margin-left: 3px;
+        margin-bottom: 30px;
+    }
+
+    #hideDiv {
+        display: none !important;
+    }
+}

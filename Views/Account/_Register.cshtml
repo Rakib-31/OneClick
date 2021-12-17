@@ -1,0 +1,27 @@
+﻿@model IdentitySample.Models.RegisterViewModel
+
+<div class="kt-login__head">
+    <h3 class="kt-login__title">Register</h3>
+</div>
+@using (Html.BeginForm("Register", "Account", new { returnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "kt-form", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", type = "text", placeholder = "Email" })
+        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.PasswordFor(m => m.Password, new { @class = "form-control", type = "password", placeholder = "Password" })
+        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", type = "password", placeholder = "Confirm Password" })
+        @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+    </div>
+    
+    <div class="kt-login__actions" style="text-align: center;">
+        <input type="submit" style="padding-left: 30px; padding-right: 30px;" id="kt_register_submit" value="Register" class="btn btn-brand btn-pill kt-login__btn-primary" />
+    </div>
+}
