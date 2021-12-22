@@ -1,86 +1,111 @@
-﻿@{
-    ViewBag.Title = "Orders Dashboard";
+﻿@model List<OneClick.Models.OrdersTbl>
+@{
+    ViewBag.Title = "Mobiles";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="row">
-    <div class="col-xl-12">
-        <div class="kt-portlet kt-portlet--height-fluid kt-portlet--mobile ">
-            <div class="kt-portlet__head kt-portlet__head--lg kt-portlet__head--noborder kt-portlet__head--break-sm">
-                <div class="kt-portlet__head-label">
-                    <h3 class="kt-portlet__head-title">
-                        Exclusive Datatable Plugin
-                    </h3>
-                </div>
-                <div class="kt-portlet__head-toolbar">
-                    <div class="dropdown dropdown-inline">
-                        <button type="button" class="btn btn-clean btn-sm btn-icon btn-icon-md" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="flaticon-more-1"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-md dropdown-menu-fit">
-
-                            <!--begin::Nav-->
-                            <ul class="kt-nav">
-                                <li class="kt-nav__head">
-                                    Export Options
-                                    <span data-toggle="kt-tooltip" data-placement="right" title="Click to learn more...">
-                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon kt-svg-icon--brand kt-svg-icon--md1">
-                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                <rect x="0" y="0" width="24" height="24" />
-                                                <circle fill="#000000" opacity="0.3" cx="12" cy="12" r="10" />
-                                                <rect fill="#000000" x="11" y="10" width="2" height="7" rx="1" />
-                                                <rect fill="#000000" x="11" y="7" width="2" height="2" rx="1" />
-                                            </g>
-                                        </svg>
-                                    </span>
-                                </li>
-                                <li class="kt-nav__separator"></li>
-                                <li class="kt-nav__item">
-                                    <a href="#" class="kt-nav__link">
-                                        <i class="kt-nav__link-icon flaticon2-drop"></i>
-                                        <span class="kt-nav__link-text">Activity</span>
-                                    </a>
-                                </li>
-                                <li class="kt-nav__item">
-                                    <a href="#" class="kt-nav__link">
-                                        <i class="kt-nav__link-icon flaticon2-calendar-8"></i>
-                                        <span class="kt-nav__link-text">FAQ</span>
-                                    </a>
-                                </li>
-                                <li class="kt-nav__item">
-                                    <a href="#" class="kt-nav__link">
-                                        <i class="kt-nav__link-icon flaticon2-telegram-logo"></i>
-                                        <span class="kt-nav__link-text">Settings</span>
-                                    </a>
-                                </li>
-                                <li class="kt-nav__item">
-                                    <a href="#" class="kt-nav__link">
-                                        <i class="kt-nav__link-icon flaticon2-new-email"></i>
-                                        <span class="kt-nav__link-text">Support</span>
-                                        <span class="kt-nav__link-badge">
-                                            <span class="kt-badge kt-badge--success kt-badge--rounded">5</span>
-                                        </span>
-                                    </a>
-                                </li>
-                                <li class="kt-nav__separator"></li>
-                                <li class="kt-nav__foot">
-                                    <a class="btn btn-label-danger btn-bold btn-sm" href="#">Upgrade plan</a>
-                                    <a class="btn btn-clean btn-bold btn-sm" href="#" data-toggle="kt-tooltip" data-placement="right" title="Click to learn more...">Learn more</a>
-                                </li>
-                            </ul>
-
-                            <!--end::Nav-->
+<div class="kt-subheader   kt-grid__item" id="kt_subheader">
+    <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+        <div class="row" style="width: 100%;">
+            <div class="col-xl-12">
+                <div class="kt-portlet kt-portlet--height-fluid">
+                    <div class="kt-portlet__head">
+                        <div class="kt-portlet__head-label">
+                            <h3 class="kt-portlet__head-title">
+                                My Order List
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="kt-portlet__body kt-portlet__body--fluid">
+                        <div class="kt-widget12">
+                            <div class="kt-widget12__content" id="index-special-test-list">
+                                <div class="table-responsive">
+                                    <table class="table table-striped" id="my-order-table">
+                                        <thead>
+                                            <tr>
+                                                <th style="display: none;">Id</th>
+                                                <th>Order Id</th>
+                                                <th>Price</th>
+                                                <th>Status</th>
+                                                <th>Order Date</th>
+                                                <th>Details</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="kt-portlet__body kt-portlet__body--fit">
-
-                <!--begin: Datatable -->
-                <div class="kt-datatable" id="kt_datatable_latest_orders"></div>
-
-                <!--end: Datatable -->
-            </div>
         </div>
     </div>
 </div>
+
+
+
+<script>
+    $(function () {
+        var table = $("#my-order-table").DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                { extend: 'print', className: 'btn dark btn-outline' },
+                { extend: 'copy', className: 'btn red btn-outline' },
+                { extend: 'pdf', className: 'btn green btn-outline' },
+                { extend: 'excel', className: 'btn yellow btn-outline ' },
+                { extend: 'csv', className: 'btn purple btn-outline ' },
+                { extend: 'colvis', className: 'btn dark btn-outline', text: 'Columns' }
+            ],
+            "processing": true, // for show progress bar
+            "language": {
+                processing: '<div class="loading-message loading-message-boxed"><div class="block-spinner-bar"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div></div>'
+            },
+            "serverSide": true, // for process server side
+            "filter": true, // this is for disable filter (search box)
+            "orderMulti": false, // for disable multiple column at once
+            "ajax": {
+                "url": '/Order/MyOrder',
+                "type": "POST",
+                "datatype": "json"
+            },
+            "order": [[3, "desc"]],
+            "columns": [
+                { "data": "Id", "name": "Id", "autoWidth": true, "visible": false },
+                { "data": "OrderId", "name": "Order Id", "autoWidth": true, "visible": true },
+                { "data": "TotalPayment", "name": "Price", "autoWidth": true, "visible": true },
+                {
+                    sortable: false,
+                    "render": function (data, type, full, meta) {
+                        var status = full.OrderStatus;
+                        var link = "";
+                        if (status == 1)
+                            link = '<span class="kt-badge kt-badge--success kt-badge--inline">Processing</span>';
+                        return link;
+                    }
+                },
+                { "data": "OrderDate", "name": "Order Date", "autoWidth": true, "visible": true },
+                {
+                    sortable: false,
+                    "render": function (data, type, full, meta) {
+                        var id = full.Id;
+                        var link = '  <button type="button" class="btn btn-primary btn-label-brand btn-sm" onclick="ViewOrderDetails(' + id + ')"><i class="fa fa-edit"></i>&nbsp;Details</button>';
+                        return link;
+                    }
+                }
+
+            ]
+        });
+        $('.search-input').on('keyup change', function () {
+            var index = $(this).attr('data-column');
+            val = $(this).val();
+            table.columns(index).search(val.trim()).draw();
+        });
+    });
+</script>
+<script>
+    function ViewOrderDetails(id) {
+
+    }
+</script>

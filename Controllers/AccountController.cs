@@ -177,7 +177,14 @@ namespace IdentitySample.Controllers
                 {
                     returnUrl = returnUrl.Replace("samp", "&");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { 
+                    UserName = model.Email, 
+                    Email = model.Email,
+                    House = model.House,
+                    City = model.City,
+                    Road = model.Road,
+                    Country = model.Country
+                };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

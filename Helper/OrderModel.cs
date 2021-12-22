@@ -14,7 +14,7 @@ namespace OneClick.Helper
 
         public double TotalPayment { get; set; }
 
-        public bool OrderStatus { get; set; }
+        public int OrderStatus { get; set; }
 
         public DateTime? OrderDate { get; set; }
 
@@ -60,6 +60,7 @@ namespace OneClick.Helper
         public string City { get; set; }
         public string PostCode { get; set; }
         public string House { get; set; }
+        public string Road { get; set; }
         public List<SelectListItem> IsCurrentAddress { get; set; }
         public string SelectedAddress { get; set; }
     }

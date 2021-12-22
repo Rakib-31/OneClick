@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Security.Cryptography;
 using System.Text;
 using OneClick.Models;
+using Microsoft.AspNet.Identity;
 
 namespace PShop.Controllers
 {
@@ -14,28 +15,14 @@ namespace PShop.Controllers
         // GET: Order
         public ActionResult Index()
         {
-            using (CommonDataContext dbContext = new CommonDataContext())
-            {
-                var model = dbContext.OrdersTbls.Select(x =>
-                    new OrderModel
-                    {
-                        Id = x.Id,
-                        OrderId = x.OrderId.ToString(),
-                        OrderDate = x.OrderDate,
-                        OrderStatus = x.OrderStatus,
-                        TotalPayment = x.TotalPayment,
-                        UserId = x.UserId,
-                        PaymentStatus = x.PaymentStatus,
-                        ShippedDate = x.ShippedDate
-                    }
-                ).ToList();
-                return View(model);
-            }
-
+            return View();
         }
-        public JsonResult GetOrder(string userId)
+
+        [HttpPost]
+        public JsonResult MyOrder(string search)
         {
             bool success = false;
+            var userId = User.Identity.GetUserId();
             using (CommonDataContext dbContext = new CommonDataContext())
             {
                 var model = dbContext.OrdersTbls.Where(x => x.UserId == userId).ToList();
@@ -168,18 +155,41 @@ namespace PShop.Controllers
         public string GetDeliveryAddress(AddressModel orderModel)
         {
             string address = "";
-            if (!string.IsNullOrEmpty(orderModel.House))
+            var userId = User.Identity.GetUserId();
+            if (orderModel != null)
             {
-                address = string.IsNullOrEmpty(address) ? orderModel.House : address + ", " + orderModel.House;
+                if(orderModel.SelectedAddress == "0")
+                {
+                    using(var dbContext = new CommonDataContext())
+                    {
+                        var user = dbContext.AspNetUsers.Where(x => x.Id == userId).FirstOrDefault();
+                        if(user != null)
+                        {
+                            orderModel.Road = user.Road;
+                            orderModel.House = user.House;
+                            orderModel.City = user.City;
+                            orderModel.Country = user.Country;
+                        }
+                    }
+                }
+                if (!string.IsNullOrEmpty(orderModel.Road))
+                {
+                    address = string.IsNullOrEmpty(address) ? orderModel.Road : address + ", " + orderModel.Road;
+                }
+                if (!string.IsNullOrEmpty(orderModel.House))
+                {
+                    address = string.IsNullOrEmpty(address) ? orderModel.House : address + ", " + orderModel.House;
+                }
+                if (!string.IsNullOrEmpty(orderModel.City))
+                {
+                    address = string.IsNullOrEmpty(address) ? orderModel.City : address + ", " + orderModel.City;
+                }
+                if (!string.IsNullOrEmpty(orderModel.Country))
+                {
+                    address = string.IsNullOrEmpty(address) ? orderModel.Country : address + ", " + orderModel.Country;
+                }
             }
-            if (!string.IsNullOrEmpty(orderModel.City))
-            {
-                address = string.IsNullOrEmpty(address) ? orderModel.City : address + ", " + orderModel.City;
-            }
-            if (!string.IsNullOrEmpty(orderModel.Country))
-            {
-                address = string.IsNullOrEmpty(address) ? orderModel.Country : address + ", " + orderModel.Country;
-            }
+            
             return address;
         }
         public OrdersTbl GetOrderModel(string userId, Guid orderId, double totalPayment, string address )
@@ -190,7 +200,7 @@ namespace PShop.Controllers
                 OrderId = orderId,
                 TotalPayment = totalPayment,
                 PaymentStatus = false,
-                OrderStatus = true,
+                OrderStatus = 1,
                 OrderDate = DateTime.UtcNow,
                 DeliveryAddress = address
             };
@@ -200,6 +210,7 @@ namespace PShop.Controllers
         {
             using (CommonDataContext dbContext = new CommonDataContext())
             {
+                var userId = User.Identity.GetUserId();
                 bool success = false;
                 string msg = "Order not completed.";
                 try
@@ -218,7 +229,7 @@ namespace PShop.Controllers
                     }
                     else
                     {
-                        var model = dbContext.CartsTbls.Where(x => x.UserId == orderModel.UserId).ToList();
+                        var model = dbContext.CartsTbls.Where(x => x.UserId == userId).ToList();
                         foreach (var x in model)
                         {
                             OrderData = MakeListData(x.ProductId, x.Category, x.Quantity, x.Color, x.SubTotal);
@@ -232,7 +243,7 @@ namespace PShop.Controllers
 
                     
                     string deliveryAddress = GetDeliveryAddress(orderModel);
-                    var OrderDetails = GetOrderModel(orderModel.UserId, OrderId, TotalPayment, deliveryAddress);
+                    var OrderDetails = GetOrderModel(userId, OrderId, TotalPayment, deliveryAddress);
 
                     
                     dbContext.OrdersTbls.InsertOnSubmit(OrderDetails);
@@ -264,7 +275,7 @@ namespace PShop.Controllers
                 var model = dbContext.OrdersTbls.Where(x => x.Id == id).FirstOrDefault();
                 if (model != null)
                 {
-                    model.OrderStatus = false;
+                    model.OrderStatus = 1;
                 }
                 try
                 {

@@ -20,7 +20,27 @@
         @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", type = "password", placeholder = "Confirm Password" })
         @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
     </div>
-    
+    <div class="form-group">
+        <div class="col-md-6 col-xl-6 col-sm-12">
+            @Html.TextBoxFor(m => m.House, new { @class = "form-control", type = "text", placeholder = "Enter House No." })
+            @Html.ValidationMessageFor(m => m.House, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-6 col-xl-6 col-sm-12">
+            @Html.TextBoxFor(m => m.Road, new { @class = "form-control", type = "text", placeholder = "Enter Road No." })
+            @Html.ValidationMessageFor(m => m.Road, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-6 col-xl-6 col-sm-12">
+            @Html.TextBoxFor(m => m.City, new { @class = "form-control", type = "text", placeholder = "Enter City" })
+            @Html.ValidationMessageFor(m => m.City, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-6 col-xl-6 col-sm-12">
+            @Html.TextBoxFor(m => m.Country, new { @class = "form-control", type = "text", placeholder = "Enter Country", value="Bangladesh" })
+            @Html.ValidationMessageFor(m => m.Country, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
     <div class="kt-login__actions" style="text-align: center;">
         <input type="submit" style="padding-left: 30px; padding-right: 30px;" id="kt_register_submit" value="Register" class="btn btn-brand btn-pill kt-login__btn-primary" />
     </div>
